@@ -225,7 +225,7 @@ class DetailsFragment : Fragment(), SearchView.OnQueryTextListener {
                 setBackgroundColor(Theming.resolveColorAttr(requireContext(), R.attr.toolbar_bg))
             }
 
-            val params = layoutParams as LinearLayout.LayoutParams
+            val params = layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
             if (sLaunchedByArtistView) params.bottomMargin = resources.getDimensionPixelSize(R.dimen.player_controls_padding_normal)
         }
     }
