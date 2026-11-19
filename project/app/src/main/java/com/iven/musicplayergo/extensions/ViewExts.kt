@@ -7,7 +7,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.Bitmap
 import android.graphics.drawable.InsetDrawable
 import android.text.Spannable
 import android.text.SpannableString
@@ -21,9 +20,7 @@ import android.widget.TextView
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.Toolbar
 import androidx.core.animation.doOnEnd
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.core.widget.ImageViewCompat
@@ -41,6 +38,7 @@ import coil.load
 import com.google.android.material.animation.ArgbEvaluatorCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.iven.musicplayergo.GoPreferences
 import com.iven.musicplayergo.R
 import com.iven.musicplayergo.ui.SingleClickHelper
 import com.iven.musicplayergo.utils.Theming
@@ -56,14 +54,33 @@ fun View.applyEdgeToEdge() {
     }
 }
 
-fun ImageView.loadWithError(bitmap: Bitmap?, error: Boolean, albumArt: Int) {
-    if (error) {
+fun ImageView.loadAlbumCover(albumId: Long?, albumArt: Int) {
+    val coverUri = albumId
+        ?.takeIf { GoPreferences.getPrefsInstance().isCovers }
+        ?.toAlbumArtURI()
+
+    if (coverUri == null) {
+        load(null)
+        setImageResource(albumArt)
         scaleType = ImageView.ScaleType.CENTER_INSIDE
-        load(ContextCompat.getDrawable(context, albumArt)?.toBitmap())
         return
     }
-    scaleType = ImageView.ScaleType.CENTER_CROP
-    load(bitmap)
+
+    scaleType = ImageView.ScaleType.CENTER_INSIDE
+
+    load(coverUri) {
+        placeholder(albumArt)
+        error(albumArt)
+        crossfade(false)
+        listener(
+            onSuccess = { _, _ ->
+                scaleType = ImageView.ScaleType.CENTER_CROP
+            },
+            onError = { _, _ ->
+                scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
+        )
+    }
 }
 
 // https://stackoverflow.com/a/38241603
