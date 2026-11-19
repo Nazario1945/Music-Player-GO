@@ -80,21 +80,6 @@ class NowPlaying: BottomSheetDialogFragment() {
 
     private fun setupView() {
         _nowPlayingBinding?.run {
-            // --- NUEVO: Fondo con el wallpaper del sistema ---
-            try {
-                val wallpaperManager = android.app.WallpaperManager.getInstance(requireContext())
-                val wallpaperDrawable = wallpaperManager.drawable
-                if (wallpaperDrawable != null) {
-                    val bitmap = (wallpaperDrawable as android.graphics.drawable.BitmapDrawable).bitmap
-                    val bgView = android.view.View(requireContext())
-                    bgView.background = android.graphics.drawable.BitmapDrawable(resources, bitmap)
-                    bgView.alpha = 0.3f // 30% de visibilidad
-                    (root as android.view.ViewGroup).addView(bgView, 0)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            // --------------------------------------------------
             npSong.isSelected = true
             npArtistAlbum.isSelected = true
             setupNPCoverLayout()
