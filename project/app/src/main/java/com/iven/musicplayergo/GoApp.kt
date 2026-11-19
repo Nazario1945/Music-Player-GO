@@ -18,6 +18,7 @@ class GoApp : Application(), ImageLoaderFactory {
 
     override fun newImageLoader() = ImageLoader.Builder(this)
         .diskCachePolicy(CachePolicy.DISABLED)
+        .memoryCachePolicy(CachePolicy.DISABLED)
         .crossfade(true)
         .build()
 }
