@@ -315,6 +315,8 @@ class NowPlaying: BottomSheetDialogFragment() {
         mAlbumIdNp = selectedSong.albumId
         mAlbumIdNp?.waitForCover(requireContext()) { bmp, error ->
             _npCoverBinding?.npCover?.loadWithError(bmp, error, R.drawable.ic_music_note_cover)
+            // Cargar también en el fondo desenfocado (con alpha en el XML)
+            _nowPlayingBinding?.root?.findViewById<android.widget.ImageView>(R.id.np_bg_image)?.loadWithError(bmp, error, R.drawable.ic_music_note_cover)
         }
     }
 
