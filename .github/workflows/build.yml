@@ -27,19 +27,8 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Build Release APK (sin firmar para medir)
-        run: |
-          cd project
-          ./gradlew assembleRelease
-
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: MusicPlayerGO-Debug
           path: project/app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Upload Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: MusicPlayerGO-Release
-          path: project/app/build/outputs/apk/release/app-release-unsigned.apk
