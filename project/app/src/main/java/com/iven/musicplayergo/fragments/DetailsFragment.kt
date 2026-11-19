@@ -290,7 +290,7 @@ class DetailsFragment : Fragment(), SearchView.OnQueryTextListener {
                     albumViewArt.background.alpha = Theming.getAlbumCoverAlpha(requireContext())
                     albumViewArt.doOnPreDraw {
                         val dim = it.width * 2
-                        albumViewArt.layoutParams = LinearLayout.LayoutParams(dim, dim)
+                        albumViewArt.layoutParams = androidx.constraintlayout.widget.ConstraintLayout.LayoutParams(dim, dim)
                     }
                     firstSong?.albumId?.waitForCover(requireContext()) { bmp, error ->
                         albumViewArt.loadWithError(bmp, error, R.drawable.ic_music_note_cover)
