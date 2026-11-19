@@ -29,5 +29,4 @@
 
     <color name="main_bg">#fcfcfc</color>
     <color name="toolbar_bg">@color/main_bg</color>
-    <color name="np_sheet_veil">#B3FCFCFC</color>
 </resources>

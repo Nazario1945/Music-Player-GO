@@ -4,10 +4,7 @@
     <!-- https://bryanherbst.com/2020/05/04/bottom-sheet-corners/ -->
     <style name="ThemeOverlay.Demo.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.Demo.BottomSheet</item>
-        <!-- Fondo con el wallpaper del sistema (estricto y sin consumo de RAM) -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowShowWallpaper">true</item>
-        <item name="android:backgroundDimAmount">0.0</item>
+        <item name="android:backgroundDimAmount">0.6</item>
         <item name="colorOnSurface">@color/main_bg</item>
         <item name="android:navigationBarColor">@color/nav_bar_color_sheets</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/is_light_system_bars</item>
@@ -21,7 +18,6 @@
         <item name="behavior_skipCollapsed">true</item>
         <item name="behavior_fitToContents">true</item>
         <item name="behavior_hideable">true</item>
-        <item name="backgroundTint">@color/np_sheet_veil</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.Demo" parent="">

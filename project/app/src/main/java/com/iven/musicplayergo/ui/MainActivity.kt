@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.OpenableColumns
 import android.widget.Toast
+import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -270,6 +271,11 @@ class MainActivity : BaseActivity(), UIControlInterface, MediaControlInterface {
         var newTheme = Theming.resolveTheme(this)
         if (sLaunchedByTile) newTheme = R.style.BaseTheme_Transparent
         setTheme(newTheme)
+
+        if (!sLaunchedByTile) {
+            window.setBackgroundDrawableResource(android.R.color.transparent)
+            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        }
 
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
