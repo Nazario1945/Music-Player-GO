@@ -292,9 +292,10 @@ class DetailsFragment : Fragment(), SearchView.OnQueryTextListener {
                         val dim = it.width * 2
                         albumViewArt.layoutParams = androidx.constraintlayout.widget.ConstraintLayout.LayoutParams(dim, dim)
                     }
-                    firstSong?.albumId?.waitForCover(requireContext()) { bmp, error ->
-                        albumViewArt.loadWithError(bmp, error, R.drawable.ic_music_note_cover)
-                    }
+                    albumViewArt.loadAlbumCover(
+                        firstSong?.albumId,
+                        R.drawable.ic_music_note_cover
+                    )
                 }
 
                 val searchView =
@@ -646,9 +647,10 @@ class DetailsFragment : Fragment(), SearchView.OnQueryTextListener {
 
                     image.background.alpha = Theming.getAlbumCoverAlpha(requireContext())
 
-                    itemAlbum?.music?.first()?.albumId?.waitForCover(requireContext()) { bmp, error ->
-                        image.loadWithError(bmp, error, R.drawable.ic_music_note_cover_alt)
-                    }
+                    image.loadAlbumCover(
+                        itemAlbum?.music?.firstOrNull()?.albumId,
+                        R.drawable.ic_music_note_cover_alt
+                    )
 
                     root.setOnClickListener {
                         if (absoluteAdapterPosition != mSelectedAlbumPosition) {
