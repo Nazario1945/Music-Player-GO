@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="false"
     android:focusable="false"
-    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <!-- the album's cover + actions -->
-    <include layout="@layout/now_playing_cover" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/np_cover_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- the SeekBar + seek value -->
+        <include layout="@layout/now_playing_cover" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <SeekBar
         android:id="@+id/np_seek_bar"
         android:layout_width="match_parent"
@@ -20,15 +25,16 @@
         android:focusable="true"
         android:progressBackgroundTint="?attr/colorPrimary"
         android:progressBackgroundTintMode="src_in"
-        android:splitTrack="false" />
+        android:splitTrack="false"
+        app:layout_constraintTop_toBottomOf="@id/np_cover_container" />
 
-    <!-- the SeekBar value -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/np_seek_bar">
 
         <TextView
             android:id="@+id/np_seek"
@@ -51,7 +57,6 @@
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 
-    <!-- the album's title -->
     <LinearLayout
         android:id="@+id/np_playing_song_container"
         android:layout_width="match_parent"
@@ -60,7 +65,8 @@
         android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/np_seek_bar">
 
         <TextView
             android:id="@+id/np_song"
@@ -106,8 +112,22 @@
             android:textColor="?android:attr/textColorTertiary" />
     </LinearLayout>
 
-    <include layout="@layout/now_playing_controls" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/np_controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/np_playing_song_container">
 
-    <include layout="@layout/now_playing_vol_control" />
+        <include layout="@layout/now_playing_controls" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/np_vol_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/np_controls_container">
+
+        <include layout="@layout/now_playing_vol_control" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
